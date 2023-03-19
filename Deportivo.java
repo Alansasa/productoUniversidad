@@ -14,7 +14,4 @@ public class Deportivo extends Barco{
     public void setCv(double cv) {
         this.cv = cv;
     }
-
-    
-    
 }

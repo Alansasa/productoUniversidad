@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 
 public class Alquiler {
     private LocalDate fechaInicial;
@@ -9,38 +7,54 @@ public class Alquiler {
     private Yate yate;
     private Deportivo deportivo;
     private Velero velero;
-    ArrayList<Barco> barcos = new ArrayList<>();
-    
+    private double costoAlquiler;
 
-    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre){
+    //constructor de Yate   
+    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre,
+    String matricula, double largo, int añoFabricacion, double cv, int numeroCamarote){
         fechaFinal = LocalDate.of(yearFin, mesFin, diaFin);
         fechaInicial = LocalDate.of(yearInicial, mesIni, diaIni);
         this.posicionAmarre = posicionAmarre;
+        yate = new Yate(matricula, largo, añoFabricacion, cv, numeroCamarote);
     }
 
-    public void calculoAlquiler(String tipoDeBarco){
-        barcos.add(yate);
-        barcos.add(deportivo);
-        barcos.add(velero);
+    //constructor de Deportivo
+    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre,
+    String matricula, double largo, int añoFabricacion, double cv){
+        fechaFinal = LocalDate.of(yearFin, mesFin, diaFin);
+        fechaInicial = LocalDate.of(yearInicial, mesIni, diaIni);
+        this.posicionAmarre = posicionAmarre;
+        deportivo = new Deportivo(matricula, largo, añoFabricacion, cv);
+    }
 
+    //Constructor de Velero
+    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre,
+    String matricula, double largo, int añoFabricacion, int numeroMastiles){
+        fechaFinal = LocalDate.of(yearFin, mesFin, diaFin);
+        fechaInicial = LocalDate.of(yearInicial, mesIni, diaIni);
+        this.posicionAmarre = posicionAmarre;
+        velero = new Velero(matricula, largo, añoFabricacion, numeroMastiles);
+    }
+
+    public double calculoAlquiler(String tipoDeBarco){
+        
         switch(tipoDeBarco){
             case "Yate":
-                Yate bElegidoY = (Yate) barcos.get(0);
-                double cvY = bElegidoY.getCv();
-                int numeroCamarotes = bElegidoY.getNumeroCamarotes();
-                double costoAlquilerY = (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * bElegidoY.moduloDeFuncion(cvY, numeroCamarotes) * bElegidoY.precioFijoAlquiler;
-                System.out.println("El costo de alquiler del Yate es de: $" + costoAlquilerY);
+                double cvY = yate.getCv();
+                int numeroCamarotes = yate.getNumeroCamarotes();
+                this.costoAlquiler = (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * yate.moduloDeFuncion(cvY, numeroCamarotes) * yate.precioFijoAlquiler;
                 break;
-            case "Deportivo":
-                Deportivo bElegidoD = (Deportivo) barcos.get(1);
-                double cvD = bElegidoD.getCv();
-                double costoAlquilerD = (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * bElegidoD.moduloDeFuncion(cvD) * bElegidoD.precioFijoAlquiler;
-                System.out.println("El costo de alquiler de la embarcacion deportivas es : $" + costoAlquilerD);
+            case "Embarcacion Deportiva":
+                double cvD = deportivo.getCv();
+                this.costoAlquiler = (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * deportivo.moduloDeFuncion(cvD) * deportivo.precioFijoAlquiler;
                 break;
             case "Velero":
-
+                double nMasV = velero.getNumeroMastiles();
+                this.costoAlquiler= (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * velero.moduloDeFuncion(nMasV) * velero.precioFijoAlquiler;
+                break;
         }
         
+        return costoAlquiler;
     }
 
     public LocalDate getFechaInicial() {
