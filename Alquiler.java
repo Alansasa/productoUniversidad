@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Alquiler {
     private LocalDate fechaInicial;
@@ -37,38 +38,37 @@ public class Alquiler {
     }
 
     public double calculoAlquiler(String tipoDeBarco){
-        
-        switch(tipoDeBarco){
-            case "Yate":
+        switch(tipoDeBarco.toLowerCase()){
+            case "yate":
                 double cvY = yate.getCv();
                 int numeroCamarotes = yate.getNumeroCamarotes();
-                this.costoAlquiler = (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * yate.moduloDeFuncion(cvY, numeroCamarotes) * yate.precioFijoAlquiler;
+                this.costoAlquiler = diasDeAlquiler() * yate.moduloDeFuncion(cvY, numeroCamarotes) * yate.precioFijoAlquiler;
                 break;
-            case "Embarcacion Deportiva":
+            case "embarcacion deportiva":
                 double cvD = deportivo.getCv();
-                this.costoAlquiler = (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * deportivo.moduloDeFuncion(cvD) * deportivo.precioFijoAlquiler;
+                this.costoAlquiler = diasDeAlquiler() * deportivo.moduloDeFuncion(cvD) * deportivo.precioFijoAlquiler;
                 break;
-            case "Velero":
+            case "velero":
                 double nMasV = velero.getNumeroMastiles();
-                this.costoAlquiler= (fechaFinal.getDayOfYear() - fechaInicial.getDayOfYear()) * velero.moduloDeFuncion(nMasV) * velero.precioFijoAlquiler;
+                this.costoAlquiler= diasDeAlquiler() * velero.moduloDeFuncion(nMasV) * velero.precioFijoAlquiler;
                 break;
         }
         
         return costoAlquiler;
     }
+    
+
+    public long diasDeAlquiler(){
+        long diasDiferencia = ChronoUnit.DAYS.between(fechaInicial, fechaFinal);
+        return diasDiferencia;
+    }
 
     public LocalDate getFechaInicial() {
         return fechaInicial;
     }
-    public void setFechaInicial(LocalDate fechaInicial) {
-        this.fechaInicial = fechaInicial;
-    }
 
     public LocalDate getFechaFinal() {
         return fechaFinal;
-    }
-    public void setFechaFinal(LocalDate fechaFinal) {
-        this.fechaFinal = fechaFinal;
     }
 
     public String getPosicionAmarre() {
@@ -82,25 +82,11 @@ public class Alquiler {
         return yate;
     }
 
-    public void setYate(Yate yate) {
-        this.yate = yate;
-    }
-
     public Deportivo getDeportivo() {
         return deportivo;
-    }
-
-    public void setDeportivo(Deportivo deportivo) {
-        this.deportivo = deportivo;
     }
 
     public Velero getVelero() {
         return velero;
     }
-
-    public void setVelero(Velero velero) {
-        this.velero = velero;
-    }
-
-    
 }

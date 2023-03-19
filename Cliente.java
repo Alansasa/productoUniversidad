@@ -47,29 +47,29 @@ public class Cliente {
     }
     
     public void mostrarDatos(String eleccion){
-        JOptionPane.showMessageDialog(null, "Datos del Cliente: \nNombre: "  + getNombre() + "\nApellido: " + getApellido() + "\nCedula de identificación: " +
-        getCedulaDeIdentificacion());
-        JOptionPane.showMessageDialog(null, "Datos del Alquiler: \nFecha inicial: " + alquiler.getFechaInicial() + "\nFecha final: " + alquiler.getFechaFinal() +
-        "\nPosicion de amarre: " + alquiler.getPosicionAmarre());
+        JOptionPane.showMessageDialog(null, "Datos del Cliente: \nNombre: "  + getNombre().toUpperCase() + "\nApellido: " + getApellido().toUpperCase() 
+        + "\nCedula de identificación: " + getCedulaDeIdentificacion());
+        JOptionPane.showMessageDialog(null, "Datos del Alquiler: \nFecha inicial: " + alquiler.getFechaInicial() + "\nFecha final: " 
+        + alquiler.getFechaFinal() + "\nPosicion de amarre: " + alquiler.getPosicionAmarre());
 
-        switch(eleccion){
-            case "Yate":
-                JOptionPane.showMessageDialog(null, "Datos del barco: \nTipo: " + eleccion + "\nMatricula: " + alquiler.getYate().matricula + 
-                "\nLargo: " + alquiler.getYate().largo + "\nAño de Fabricación: " + alquiler.getYate().añoFabricacion + "\nCaballos de Vapor: " + 
+        switch(eleccion.toLowerCase()){
+            case "yate":
+                JOptionPane.showMessageDialog(null, "Datos del barco: \nTipo: " + eleccion.toUpperCase() + "\nMatricula: " + alquiler.getYate().matricula 
+                + "\nLargo: " + alquiler.getYate().largo + "\nAño de Fabricación: " + alquiler.getYate().añoFabricacion + "\nCaballos de Vapor: " + 
                 alquiler.getYate().getCv() + "\nNumero de camarotes: " + alquiler.getYate().getNumeroCamarotes());
-                JOptionPane.showMessageDialog(null, "COSTO TOTAL DEL ALQUILER DEL YATE ES: $" + alquiler.calculoAlquiler(eleccion));
+                JOptionPane.showMessageDialog(null, "COSTO TOTAL DEL ALQUILER DEL YATE ES: \n$" + alquiler.calculoAlquiler(eleccion));
                 break;
-            case "Embarcacion Deportiva":
-                JOptionPane.showMessageDialog(null, "Datos del barco: \nTipo: " + eleccion + "\nMatricula: " + alquiler.getDeportivo().matricula + 
-                "\nLargo: " + alquiler.getDeportivo().largo + "\nAño de Fabricación: " + alquiler.getDeportivo().añoFabricacion + "\nCaballos de Vapor: " + 
-                alquiler.getDeportivo().getCv());
-                JOptionPane.showMessageDialog(null, "COSTO TOTAL DEL ALQUILER DE LA EMBARCACION DESPORTIVA ES: $" + alquiler.calculoAlquiler(eleccion));
+            case "embarcacion deportiva":
+                JOptionPane.showMessageDialog(null, "Datos del barco: \nTipo: " + eleccion.toUpperCase() + "\nMatricula: " 
+                + alquiler.getDeportivo().matricula + "\nLargo: " + alquiler.getDeportivo().largo + "\nAño de Fabricación: " + alquiler.getDeportivo().añoFabricacion 
+                + "\nCaballos de Vapor: " + alquiler.getDeportivo().getCv());
+                JOptionPane.showMessageDialog(null, "COSTO TOTAL DEL ALQUILER DE LA EMBARCACION DEPORTIVA ES: \n$" + alquiler.calculoAlquiler(eleccion));
                 break;
-            case "Velero":
-                JOptionPane.showMessageDialog(null, "Datos del barco: \nTipo: " + eleccion + "\nMatricula: " + alquiler.getVelero().matricula + 
-                "\nLargo: " + alquiler.getVelero().largo + "\nAño de Fabricación: " + alquiler.getVelero().añoFabricacion + 
+            case "velero":
+                JOptionPane.showMessageDialog(null, "Datos del barco: \nTipo: " + eleccion.toUpperCase() + "\nMatricula: " 
+                + alquiler.getVelero().matricula + "\nLargo: " + alquiler.getVelero().largo + "\nAño de Fabricación: " + alquiler.getVelero().añoFabricacion + 
                 "\nNumero de mastiles: " + alquiler.getVelero().getNumeroMastiles());
-                JOptionPane.showMessageDialog(null, "COSTO TOTAL DEL ALQUILER DEL VELERO ES: $" + alquiler.calculoAlquiler(eleccion));
+                JOptionPane.showMessageDialog(null, "COSTO TOTAL DEL ALQUILER DEL VELERO ES: \n$" + alquiler.calculoAlquiler(eleccion));
                 break;
         }
     }
