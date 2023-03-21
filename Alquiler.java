@@ -11,28 +11,28 @@ public class Alquiler {
     private double costoAlquiler;
 
     //constructor de Yate   
-    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre,
+    public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
     String matricula, double largo, int añoFabricacion, double cv, int numeroCamarote){
-        fechaFinal = LocalDate.of(yearFin, mesFin, diaFin);
-        fechaInicial = LocalDate.of(yearInicial, mesIni, diaIni);
+        this.fechaFinal = LocalDate.parse(fechaFinal);
+        this.fechaInicial = LocalDate.parse(fechaInicial);
         this.posicionAmarre = posicionAmarre;
         yate = new Yate(matricula, largo, añoFabricacion, cv, numeroCamarote);
     }
 
     //constructor de Deportivo
-    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre,
+    public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
     String matricula, double largo, int añoFabricacion, double cv){
-        fechaFinal = LocalDate.of(yearFin, mesFin, diaFin);
-        fechaInicial = LocalDate.of(yearInicial, mesIni, diaIni);
+        this.fechaFinal = LocalDate.parse(fechaFinal);
+        this.fechaInicial = LocalDate.parse(fechaInicial);
         this.posicionAmarre = posicionAmarre;
         deportivo = new Deportivo(matricula, largo, añoFabricacion, cv);
     }
 
     //Constructor de Velero
-    public Alquiler(int yearInicial, int mesIni, int diaIni, int yearFin, int mesFin, int diaFin, String posicionAmarre,
+    public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
     String matricula, double largo, int añoFabricacion, int numeroMastiles){
-        fechaFinal = LocalDate.of(yearFin, mesFin, diaFin);
-        fechaInicial = LocalDate.of(yearInicial, mesIni, diaIni);
+        this.fechaFinal = LocalDate.parse(fechaFinal);
+        this.fechaInicial = LocalDate.parse(fechaInicial);
         this.posicionAmarre = posicionAmarre;
         velero = new Velero(matricula, largo, añoFabricacion, numeroMastiles);
     }
