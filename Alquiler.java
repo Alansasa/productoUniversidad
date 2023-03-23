@@ -9,6 +9,7 @@ public class Alquiler {
     private Deportivo deportivo;
     private Velero velero;
     private double costoAlquiler;
+    static String[] opciones_Barco = {"Yate", "Deportivo", "Velero"};
 
     //constructor de Yate   
     public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
@@ -37,18 +38,18 @@ public class Alquiler {
         velero = new Velero(matricula, largo, añoFabricacion, numeroMastiles);
     }
 
-    public double calculoAlquiler(String tipoDeBarco){
-        switch(tipoDeBarco.toLowerCase()){
-            case "yate":
+    public double calculoAlquiler(int tipoDeBarco){
+        switch(tipoDeBarco){
+            case 0:
                 double cvY = yate.getCv();
                 int numeroCamarotes = yate.getNumeroCamarotes();
                 this.costoAlquiler = diasDeAlquiler() * yate.moduloDeFuncion(cvY, numeroCamarotes) * yate.precioFijoAlquiler;
                 break;
-            case "embarcacion deportiva":
+            case 1:
                 double cvD = deportivo.getCv();
                 this.costoAlquiler = diasDeAlquiler() * deportivo.moduloDeFuncion(cvD) * deportivo.precioFijoAlquiler;
                 break;
-            case "velero":
+            case 2:
                 double nMasV = velero.getNumeroMastiles();
                 this.costoAlquiler= diasDeAlquiler() * velero.moduloDeFuncion(nMasV) * velero.precioFijoAlquiler;
                 break;
@@ -89,4 +90,14 @@ public class Alquiler {
     public Velero getVelero() {
         return velero;
     }
+
+    public void setFechaInicial(String fechaInicial) {
+        this.fechaInicial = LocalDate.parse(fechaInicial);
+    }
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = LocalDate.parse(fechaFinal);
+    }
+
+    
 }

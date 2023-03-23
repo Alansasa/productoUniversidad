@@ -24,5 +24,4 @@ public class Yate extends Barco{
         this.numeroCamarotes = numeroCamarotes;
     }
 
-    
 }
