@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import javax.swing.JOptionPane;
+
 public class Alquiler {
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
@@ -11,29 +13,30 @@ public class Alquiler {
     private double costoAlquiler;
     static String[] opciones_Barco = {"Yate", "Deportivo", "Velero"};
 
+    public Alquiler(){
+
+    }
+
     //constructor de Yate   
-    public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
+    public Alquiler(LocalDate fechaInicial, LocalDate fechaFinal, String posicionAmarre,
     String matricula, double largo, int añoFabricacion, double cv, int numeroCamarote){
-        this.fechaFinal = LocalDate.parse(fechaFinal);
-        this.fechaInicial = LocalDate.parse(fechaInicial);
+        this.fechaFinal = fechaFinal;
+        this.fechaInicial = fechaInicial;
         this.posicionAmarre = posicionAmarre;
         yate = new Yate(matricula, largo, añoFabricacion, cv, numeroCamarote);
     }
 
     //constructor de Deportivo
-    public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
-    String matricula, double largo, int añoFabricacion, double cv){
-        this.fechaFinal = LocalDate.parse(fechaFinal);
-        this.fechaInicial = LocalDate.parse(fechaInicial);
+    public Alquiler(LocalDate fechaInicial, LocalDate fechaFinal, String posicionAmarre, String matricula, double largo, int añoFabricacion, double cv){
         this.posicionAmarre = posicionAmarre;
         deportivo = new Deportivo(matricula, largo, añoFabricacion, cv);
     }
 
     //Constructor de Velero
-    public Alquiler(String fechaInicial, String fechaFinal, String posicionAmarre,
+    public Alquiler(LocalDate fechaInicial, LocalDate fechaFinal, String posicionAmarre,
     String matricula, double largo, int añoFabricacion, int numeroMastiles){
-        this.fechaFinal = LocalDate.parse(fechaFinal);
-        this.fechaInicial = LocalDate.parse(fechaInicial);
+        this.fechaFinal = fechaFinal;
+        this.fechaInicial = fechaInicial;
         this.posicionAmarre = posicionAmarre;
         velero = new Velero(matricula, largo, añoFabricacion, numeroMastiles);
     }
@@ -58,6 +61,15 @@ public class Alquiler {
         return costoAlquiler;
     }
     
+    public void introducirDatosAlquiler(){
+        String fI = JOptionPane.showInputDialog(null, "Ingresa la fecha inicial aaaa-mm-dd", "FECHA INICIAL", 1);
+        setFechaInicial(fI);
+    
+        String fF = JOptionPane.showInputDialog(null, "Ingresa la fecha final aaaa-mm-dd", "FECHA FINAL", 1);
+        setFechaFinal(fF);
+        String posicionAmarre = JOptionPane.showInputDialog("Ingresa la posicion de amarre");
+        setPosicionAmarre(posicionAmarre);
+    }
 
     public long diasDeAlquiler(){
         long diasDiferencia = ChronoUnit.DAYS.between(fechaInicial, fechaFinal);
@@ -70,6 +82,14 @@ public class Alquiler {
 
     public LocalDate getFechaFinal() {
         return fechaFinal;
+    }
+
+    public void setFechaInicial(String fechaInicial) {
+        this.fechaInicial = LocalDate.parse(fechaInicial);
+    }
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = LocalDate.parse(fechaFinal);
     }
 
     public String getPosicionAmarre() {
@@ -90,14 +110,5 @@ public class Alquiler {
     public Velero getVelero() {
         return velero;
     }
-
-    public void setFechaInicial(String fechaInicial) {
-        this.fechaInicial = LocalDate.parse(fechaInicial);
-    }
-
-    public void setFechaFinal(String fechaFinal) {
-        this.fechaFinal = LocalDate.parse(fechaFinal);
-    }
-
     
 }

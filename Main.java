@@ -2,42 +2,24 @@ import javax.swing.JOptionPane;
 
 public class Main {
     public static void main(String[] args) {
-        String nombre = JOptionPane.showInputDialog("Introduce tu nombre: ");
-        String apellido = JOptionPane.showInputDialog("Ingresa tu apellido: ");
-        
-        Cliente Alan = new Cliente(nombre, apellido);
-        String fI = JOptionPane.showInputDialog("Ingresa la fecha inicial aaaa-mm-dd");
-        String fF = JOptionPane.showInputDialog("Ingresa la fecha final aaaa-mm-dd");
+        String[] opciones = {"True", "False"};
+        Cliente Alan = new Cliente();
+        Alan.alquilar();
+        Alan.mostrarDatos();
 
-        int seleccion_Barco = JOptionPane.showOptionDialog(null, "Seleccion un tipo de barco", 
-        "Tipo de Barco", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
-        Alquiler.opciones_Barco, Alquiler.opciones_Barco[1]); 
-        
-        double largoBarco = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el largo del barco."));
-        int añoBarco = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el año de fabricacion del barco."));
+        while (true){
+            int eleccion = JOptionPane.showOptionDialog(null, "¿Los datos son correctos?", 
+            "Verificacion de datos", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
+            opciones, opciones[0]);
 
-        
-        switch(seleccion_Barco){
-            case 0:
-                int nCam = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el numero de camarotes del Yate."));
-                double caballosY = Double.parseDouble(JOptionPane.showInputDialog("Ingresa los caballos de vapor del barco."));   
-                Alan.alquilar(new Alquiler(fI, fF, "Mediterraneo", "2231122161",
-                largoBarco, añoBarco, caballosY, nCam));
+            if (eleccion == 0){
+                JOptionPane.showMessageDialog(null, "Amarre alquilado correctamente");
                 break;
-            case 1:
-                double caballosE = Double.parseDouble(JOptionPane.showInputDialog("Ingresa los caballos de vapor del barco."));
-                Alan.alquilar(new Alquiler(fI,fF, "Mediterraneo", "2231122161",
-                largoBarco, añoBarco, caballosE));
-                break;
-            case 2:
-                int nMas = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el numero de mástiles del velero."));
-                Alan.alquilar(new Alquiler(fI, fF, "Mediterraneo", "2231122161",
-                largoBarco, añoBarco, nMas));
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "TU OPCION NO ES VÁLIDA!!!");
+            }else if(eleccion == 1){
+                JOptionPane.showMessageDialog(null, "Volvamos a llenar el formulario!!!\n");
+                Alan.alquilar();
+                Alan.mostrarDatos();
+            }    
         }
-
-        Alan.mostrarDatos(seleccion_Barco);
     }
 }
